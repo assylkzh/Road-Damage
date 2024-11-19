@@ -2,8 +2,8 @@ scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
 pillow==9.5.0
-torch==2.1.0  # Consider upgrading to the latest stable version (2.1.0)
-torchvision==0.15.0  # Ensure it is compatible with the above version of torch
+torch==2.1.0 
+torchvision==0.16.0  
 numpy==1.24.3
 setuptools>=65.5.1
-streamlit==1.17.0  # Add streamlit for cloud deployment
+streamlit==1.17.0  
