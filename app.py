@@ -1,3 +1,6 @@
+import os
+os.system("pip install torch==2.2.1 torchvision==0.15.2")
+
 import streamlit as st
 from PIL import Image
 import torch
