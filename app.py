@@ -1,24 +1,41 @@
-import os
-os.system("pip install torch==2.5.1 torchvision==0.20.1")
-
+import torch
+import torch.nn as nn
+import torchvision.models as models
 import streamlit as st
 from PIL import Image
-import torch
 import torchvision.transforms as transforms
-from model import EnhancedResNet50  
 
-# Load your trained model
-@st.cache_resource
-# Load your trained model
-@st.cache_resource
+# Define the model class (same as in your notebook)
+class EnhancedResNet50(nn.Module):
+    def __init__(self, num_classes):
+        super(EnhancedResNet50, self).__init__()
+        self.base_model = models.resnet50(pretrained=True)
+        
+        # Freeze the base model layers if required
+        for param in self.base_model.parameters():
+            param.requires_grad = False
+        
+        # Modify the final layers
+        self.base_model.fc = nn.Sequential(
+            nn.Linear(self.base_model.fc.in_features, 512),  # Reduce dimensionality
+            nn.ReLU(),
+            nn.BatchNorm1d(512),  # Batch Normalization
+            nn.Dropout(0.4),      # Dropout with 40% probability
+            nn.Linear(512, num_classes)  # Output layer
+        )
+
+    def forward(self, x):
+        return self.base_model(x)
+
+# Load the trained model
 def load_model():
-    model = EnhancedResNet50(num_classes=4)  # Adjust based on your final model
-    model.load_state_dict(torch.load("road_damage_model1.pth", map_location=torch.device('cpu')))
+    model = EnhancedResNet50(num_classes=4)  # Adjust num_classes if needed
+    state_dict = torch.load('road_damage_model2.pth', map_location=torch.device('cpu'))
+    model.load_state_dict(state_dict, strict=False)  # Set strict=False to ignore missing keys
     model.eval()  # Set model to evaluation mode
     return model
 
 model = load_model()
-
 
 # Define the class names
 class_names = ["Good", "Poor", "Satisfactory", "Very Poor"]
