@@ -1,21 +1,24 @@
 import os
-os.system("pip install torch==2.2.1 torchvision==0.15.2")
+os.system("pip install torch==2.5.1 torchvision==0.20.1")
 
 import streamlit as st
 from PIL import Image
 import torch
 import torchvision.transforms as transforms
-from model import EnhancedResNet50  # Replace with your model import
+from model import EnhancedResNet50  
 
+# Load your trained model
+@st.cache_resource
 # Load your trained model
 @st.cache_resource
 def load_model():
     model = EnhancedResNet50(num_classes=4)  # Adjust based on your final model
-    model.load_state_dict(torch.load("", map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load("road_damage_model1.pth", map_location=torch.device('cpu')))
     model.eval()  # Set model to evaluation mode
     return model
 
 model = load_model()
+
 
 # Define the class names
 class_names = ["Good", "Poor", "Satisfactory", "Very Poor"]
