@@ -14,16 +14,21 @@ This project utilizes a deep learning model based on an enhanced version of ResN
 5. [Usage](#usage)
 6. [Results](#results)
 7. [References](#references)
-8. [Contributors](#Contributors)
+8. [Contributors](#сontributors)
 
 ---
 
 ## **Project Overview**
 The aim of the “Automatic Classification of Road Damage” project is to classify images of road damages into four categories based on the extent of the damage. The categories are:
+
 Good: No visible damage.
+
 Poor: Noticeable damage, but not severe.
+
 Satisfactory: Moderate damage, requiring attention.
+
 Very Poor: Severe damage, very likely to be hazardous.
+
 The dataset used is the "Road Damage Classification and Assessment" dataset from Kaggle platform, which contains images of roads with different levels of damage. The baseline model used is - ResNet50
 
 The goal of this project is to classify road images into one of four conditions using a pretrained ResNet50 model fine-tuned with enhanced layers. The project involves:
