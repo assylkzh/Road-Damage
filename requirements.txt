@@ -41,7 +41,7 @@ referencing==0.35.1
 requests==2.32.3
 rich==13.9.4
 rpds-py==0.21.0
-scikit-learn==1.2.2
+scikit-learn==1.2.2 --only-binary :all:
 scipy==1.14.1
 seaborn==0.12.2
 six==1.16.0
